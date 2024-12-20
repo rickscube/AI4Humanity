@@ -1,5 +1,7 @@
 import base64
 import requests
+import random
+import string
 from openai import OpenAI
 from PIL import Image
 import cv2
@@ -9,15 +11,16 @@ from tkinter import ttk, messagebox
 from tkinter.font import Font
 from ttkthemes import ThemedTk
 import pandas as pd
+from datetime import datetime
 
 # Initialize OpenAI client
-client = OpenAI(api_key="im not telling you my api key")
+client = OpenAI()
 
 # Excel file setup
 output_file = "analysis_results.xlsx"
 def initialize_excel():
     if not os.path.exists(output_file):
-        df = pd.DataFrame(columns=["Item", "Condition", "Price", "Special Info"])
+        df = pd.DataFrame(columns=["Date", "ID", "Item", "Condition", "Price", "Special Info"])
         df.to_excel(output_file, index=False)
 
 initialize_excel()
@@ -80,10 +83,16 @@ def analyze_image(image_path):
     )
     return response.choices[0].message.content
 
+# Function to generate a random 6-character alphanumeric ID
+def generate_random_id():
+    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+
 # Function to record response in Excel
 def record_to_excel(item, condition, price, special_info):
+    date_today = datetime.now().strftime("%Y-%m-%d")
+    unique_id = generate_random_id()
     df = pd.read_excel(output_file)
-    new_entry = pd.DataFrame({"Item": [item], "Condition": [condition], "Price": [price], "Special Info": [special_info]})
+    new_entry = pd.DataFrame({"Date": [date_today], "ID": [unique_id], "Item": [item], "Condition": [condition], "Price": [price], "Special Info": [special_info]})
     df = pd.concat([df, new_entry], ignore_index=True)
     df.to_excel(output_file, index=False)
 
