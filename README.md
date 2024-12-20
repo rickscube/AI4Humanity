@@ -13,6 +13,7 @@ This project is a Python-based tool for analyzing images captured via a connecte
    - A suitable price for a charity store.
    - Any special features (e.g., "none").
 4. **Excel Logging**: Results are stored in an Excel file (`analysis_results.xlsx`) for easy review and record-keeping.
+5. **Date and Unique ID Logging**: Each record includes the current date and a randomly generated 6-character alphanumeric ID to ensure unique tracking of items.
 
 ---
 
@@ -51,7 +52,7 @@ Since this tool is designed for a new Windows PC, you'll need to install the fol
    - Select a camera from the dropdown menu.
    - Click the "Take Photo" button to capture an image and analyze it.
    - View the analysis result in both the terminal and the application.
-   - Results are automatically saved to `analysis_results.xlsx` in the working directory.
+   - Results are automatically saved to `analysis_results.xlsx` in the working directory, including the date and unique ID.
 
 4. **Quit**:
    Click the "Quit" button to close the application.
@@ -61,6 +62,8 @@ Since this tool is designed for a new Windows PC, you'll need to install the fol
 ## File Outputs
 - **Captured Images**: Saved as `captured_image.jpg` in the working directory.
 - **Analysis Results**: Stored in `analysis_results.xlsx` with the following columns:
+  - `Date`
+  - `ID`
   - `Item`
   - `Condition`
   - `Price`
@@ -86,4 +89,3 @@ Since this tool is designed for a new Windows PC, you'll need to install the fol
 
 ## License
 This project is open-source and available for modification and redistribution.
-
